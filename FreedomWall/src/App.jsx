@@ -8,10 +8,10 @@ function App() {
   const [to, setTo] = useState("");
   const [posts, setPosts] = useState([]);
 
-  // Fetch posts from the backend
+  // Fetch posts from the MySQL database
   useEffect(() => {
     axios
-      .get("http://localhost:8080/posts") // Backend URL
+      .get("http://localhost:8080/posts")
       .then((response) => {
         setPosts(response.data);
       })
@@ -35,7 +35,7 @@ function App() {
 
     // Send the new post to the backend
     axios
-      .post("http://localhost:8080/posts", newPost) // Backend URL
+      .post("http://localhost:8080/posts", newPost)
       .then((response) => {
         setPosts([response.data, ...posts]); // Add the new post to the list
         setPostContent("");
@@ -109,7 +109,7 @@ function App() {
                 </p>
               </div>
               <div className="date">
-                <small>{post.date}</small>
+                <small>{post.date.split("T")[0]}</small>
               </div>
             </div>
             <p>{post.content}</p>
